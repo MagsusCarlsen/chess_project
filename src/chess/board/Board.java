@@ -1,7 +1,6 @@
 package chess.board;
 
-import chess.pieces.Color;
-import chess.pieces.Piece;
+import chess.pieces.*;
 
 public class Board {
     private static class Tile{
@@ -32,9 +31,20 @@ public class Board {
 
     public Board(){
         board = new Tile[8][8];
+        Color tile_color = Color.BLACK;
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                board[i][j] = new Tile(null, j % 2 == 0 ? Color.BLACK : Color.WHITE);
+                if(tile_color == Color.BLACK){
+                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_color : Color.WHITE);
+                }
+                if(tile_color == Color.WHITE){
+                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_color : Color.BLACK);
+                }
+            }
+            if(tile_color == Color.BLACK){
+                tile_color = Color.WHITE;
+            }else{
+                tile_color = Color.BLACK;
             }
         }
     }
@@ -45,40 +55,33 @@ public class Board {
     public void set_piece(int x, int y, Piece piece) { board[x][y].set_piece(piece);}
 
     public void print_board(){
-        char char_board[8][8] = new char[][];
+        char[][] char_board = new char[8][8];
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                switch(board[i][j].piece){
-                    case Piece.PAWN:
-                        char_board[i][j] = 'P';
-                        break;
-                    case Piece.KNIGHT:
-                        char_board[i][j] = 'N';
-                        break;
-                    case Piece.BISHOP:
-                        char_board[i][j] = 'B';
-                        break;
-                    case Piece.ROOK:
-                        char_board[i][j] = 'R';
-                        break;
-                    case Piece.QUEEN:
-                        char_board[i][j] = 'Q';
-                        break;
-                    case Piece.KING:
-                        char_board[i][j] = 'K';
-                        break;
-                    case default:
-                        if(board[i][j] == Color.WHITE){
-                            char_board[i][j] = "0";
-                        }else{
-                            char_board[i][j]  = "1";
-                        }
+                if (board[i][j].piece instanceof Pawn) {
+                    char_board[i][j] = 'P';
+                } else if (board[i][j].piece instanceof Knight) {
+                    char_board[i][j] = 'N';
+                } /*else if (board[i][j].piece instanceof Bishop) {
+                    char_board[i][j] = 'B';
+                } else if (board[i][j].piece instanceof Rook) {
+                    char_board[i][j] = 'R';
+                } else if (board[i][j].piece instanceof Queen) {
+                    char_board[i][j] = 'Q';
+                } else if (board[i][j].piece instanceof King) {
+                    char_board[i][j] = 'K';
+                }*/ else {
+                    if (board[i][j].color == Color.WHITE) {
+                        char_board[i][j] = '0';
+                    } else {
+                        char_board[i][j] = '1';
+                    }
                 }
             }
         }
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                System.out.println(board[i][j]);
+                System.out.print(char_board[j][i]);
             }
             System.out.println();
         }

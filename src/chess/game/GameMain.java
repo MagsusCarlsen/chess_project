@@ -8,7 +8,8 @@ public class GameMain {
     public static void main(String[] args){
         Board board = new Board();
         Pawn pawn = new Pawn(Color.BLACK, board, new Pair<>(1, 5));
-        Pawn pawn2 = new Pawn(Color.WHITE, board, new Pair<>(1, 6));
+        Pawn pawn2 = new Pawn(Color.BLACK, board, new Pair<>(1, 6));
+        board.print_board();
         for(Pair<Integer, Integer> i : pawn.get_moves()){
             System.out.println(i.get_val1() + " - " + i.get_val2());
         }
