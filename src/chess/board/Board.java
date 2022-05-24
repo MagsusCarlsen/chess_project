@@ -42,4 +42,5 @@ public class Board {
     public Piece get_piece(int x, int y){
         return board[x][y].get_piece();
     }
+    public void set_piece(int x, int y, Piece piece) { board[x][y].set_piece(piece);}
 }
