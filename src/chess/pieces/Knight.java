@@ -42,7 +42,9 @@ public class Knight extends Piece{
     public void move(int x, int y) {
         Pair<Integer, Integer> move = new Pair<>(x, y);
         if (get_moves().contains(move)) {
+            board.set_piece(position.get_val1(), position.get_val2(), null);
             this.position = move;
+            board.set_piece(position.get_val1(), position.get_val2(), this);
         }
     }
 }

@@ -45,22 +45,20 @@ public class Pawn extends Piece {
             abs(i.get_val1() - position.get_val1()) == 1 && board.get_piece(i.get_val1(), i.get_val2()) == null
         );
 
-        for(Pair<Integer, Integer> i : moves){
-            if(i.equals(new Pair<>(position.get_val1(), position.get_val2() + 2)) && !moves.contains(new Pair<>(position.get_val1(), position.get_val2() + 1))){
-                moves.remove(i);
+        if(color == Color.BLACK){
+            for(Pair<Integer, Integer> i : moves){
+                if(i.equals(new Pair<>(position.get_val1(), position.get_val2() + 2)) && !moves.contains(new Pair<>(position.get_val1(), position.get_val2() + 1))){
+                    moves.remove(i);
+                }
+            }
+        }else{
+            for(Pair<Integer, Integer> i : moves){
+                if(i.equals(new Pair<>(position.get_val1(), position.get_val2() - 2)) && !moves.contains(new Pair<>(position.get_val1(), position.get_val2() - 1))){
+                    moves.remove(i);
+                }
             }
         }
 
-        if(color == Color.WHITE){
-            if(!moves.contains(new Pair<>(position.get_val1(), position.get_val2() - 1)) || position.get_val2() != 6){
-                moves.remove(new Pair<>(position.get_val1(), position.get_val2() - 2));
-            }
-        }
-        if(color == Color.BLACK){
-            if(!moves.contains(new Pair<>(position.get_val1(), position.get_val2() + 1)) || position.get_val2() != 6){
-                moves.remove(new Pair<>(position.get_val1(), position.get_val2() + 2));
-            }
-        }
         System.out.println(position.get_val1() + " - " + position.get_val2() + "\n");
         return moves;
     }
