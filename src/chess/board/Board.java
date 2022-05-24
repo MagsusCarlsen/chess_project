@@ -43,4 +43,38 @@ public class Board {
         return board[x][y].get_piece();
     }
     public void set_piece(int x, int y, Piece piece) { board[x][y].set_piece(piece);}
+
+    public void print_board(){
+        char char_board[8][8] = new char[][];
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                switch(board[i][j].piece){
+                    case Piece.PAWN:
+                        char_board[i][j] = 'P';
+                        break;
+                    case Piece.KNIGHT:
+                        char_board[i][j] = 'N';
+                        break;
+                    case Piece.BISHOP:
+                        char_board[i][j] = 'B';
+                        break;
+                    case Piece.ROOK:
+                        char_board[i][j] = 'R';
+                        break;
+                    case Piece.QUEEN:
+                        char_board[i][j] = 'Q';
+                        break;
+                    case Piece.KING:
+                        char_board[i][j] = 'K';
+                        break;
+                    case default:
+                        if(board[i][j] == Color.WHITE){
+                            char_board[i][j] = "0";
+                        }else{
+                            char_board[i][j]  = "1";
+                        }
+                }
+            }
+        }
+    }
 }

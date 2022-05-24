@@ -56,6 +56,11 @@ public class Pawn extends Piece {
                 moves.remove(new Pair<>(position.get_val1(), position.get_val2() - 2));
             }
         }
+        if(color == Color.BLACK){
+            if(!moves.contains(new Pair<>(position.get_val1(), position.get_val2() + 1)) || position.get_val2() != 6){
+                moves.remove(new Pair<>(position.get_val1(), position.get_val2() + 2));
+            }
+        }
         System.out.println(position.get_val1() + " - " + position.get_val2() + "\n");
         return moves;
     }
