@@ -1,14 +1,17 @@
 package chess.board;
 
 import chess.pieces.*;
+import chess.utils.*;
+
+import java.util.LinkedList;
 
 public class Board {
     private static class Tile{
         private Piece piece;
-        private Color color;
-        public Tile(Piece piece, Color color){
+        private Team team;
+        public Tile(Piece piece, Team team){
             this.piece = piece;
-            this.color = color;
+            this.team = team;
         }
 
         public Piece get_piece() {
@@ -19,32 +22,32 @@ public class Board {
             this.piece = piece;
         }
 
-        public Color get_color() {
-            return color;
+        public Team get_color() {
+            return team;
         }
 
-        public void set_color(Color color){
-            this.color = color;
+        public void set_color(Team team){
+            this.team = team;
         }
     }
     final private Tile[][] board;
 
     public Board(){
         board = new Tile[8][8];
-        Color tile_color = Color.BLACK;
+        Team tile_team = Team.BLACK;
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
-                if(tile_color == Color.BLACK){
-                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_color : Color.WHITE);
+                if(tile_team == Team.BLACK){
+                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_team : Team.WHITE);
                 }
-                if(tile_color == Color.WHITE){
-                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_color : Color.BLACK);
+                if(tile_team == Team.WHITE){
+                    board[i][j] = new Tile(null, j % 2 == 0 ? tile_team : Team.BLACK);
                 }
             }
-            if(tile_color == Color.BLACK){
-                tile_color = Color.WHITE;
+            if(tile_team == Team.BLACK){
+                tile_team = Team.WHITE;
             }else{
-                tile_color = Color.BLACK;
+                tile_team = Team.BLACK;
             }
         }
     }
@@ -62,16 +65,16 @@ public class Board {
                     char_board[i][j] = 'P';
                 } else if (board[i][j].piece instanceof Knight) {
                     char_board[i][j] = 'N';
-                } /*else if (board[i][j].piece instanceof Bishop) {
+                } else if (board[i][j].piece instanceof Bishop) {
                     char_board[i][j] = 'B';
                 } else if (board[i][j].piece instanceof Rook) {
                     char_board[i][j] = 'R';
                 } else if (board[i][j].piece instanceof Queen) {
                     char_board[i][j] = 'Q';
-                } else if (board[i][j].piece instanceof King) {
+                } /*else if (board[i][j].piece instanceof King) {
                     char_board[i][j] = 'K';
                 }*/ else {
-                    if (board[i][j].color == Color.WHITE) {
+                    if (board[i][j].team == Team.WHITE) {
                         char_board[i][j] = '0';
                     } else {
                         char_board[i][j] = '1';

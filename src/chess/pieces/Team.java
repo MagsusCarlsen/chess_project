@@ -1,5 +1,5 @@
 package chess.pieces;
 
-public enum Color {
+public enum Team {
     BLACK, WHITE
 }

@@ -7,9 +7,9 @@ import java.util.LinkedList;
 
 public class Knight extends Piece{
 
-    public Knight(Pieces type, Color color, Board board, Pair<Integer, Integer> position) {
-        super(board, color, position);
-        this.type = type;
+    public Knight(Team team, Board board, Pair<Integer, Integer> position) {
+        super(board, team, position);
+        board.set_piece(position.get_val1(), position.get_val2(), this);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class Knight extends Piece{
 
         //remove if occupied by same color
         moves.removeIf(i ->
-                board.get_piece(i.get_val1(), i.get_val2()).color == this.color
+                board.get_piece(i.get_val1(), i.get_val2()) != null && board.get_piece(i.get_val1(), i.get_val2()).team == this.team
         );
         return moves;
     }

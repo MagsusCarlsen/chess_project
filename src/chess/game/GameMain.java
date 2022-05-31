@@ -7,10 +7,9 @@ import chess.utils.Pair;
 public class GameMain {
     public static void main(String[] args){
         Board board = new Board();
-        Pawn pawn = new Pawn(Color.BLACK, board, new Pair<>(1, 5));
-        Pawn pawn2 = new Pawn(Color.BLACK, board, new Pair<>(1, 6));
+        Rook rook = new Rook(Team.BLACK, board, new Pair<>(4, 4));
         board.print_board();
-        for(Pair<Integer, Integer> i : pawn.get_moves()){
+        for(Pair<Integer, Integer> i : rook.get_moves()){
             System.out.println(i.get_val1() + " - " + i.get_val2());
         }
     }
