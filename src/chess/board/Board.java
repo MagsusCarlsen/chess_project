@@ -82,6 +82,18 @@ public class Board {
                 }
             }
         }
+
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                if(board[i][j].get_piece() == null){
+                    continue;
+                }
+                LinkedList<Pair<Integer, Integer>> moves = board[i][j].get_piece().get_moves();
+                for(Pair<Integer, Integer> move : moves){
+                    char_board[move.get_val1()][move.get_val2()] = '-';
+                }
+            }
+        }
         for(int i = 0; i < 8; i++){
             for(int j = 0; j < 8; j++){
                 System.out.print(char_board[j][i]);
