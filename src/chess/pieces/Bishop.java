@@ -13,17 +13,7 @@ public class Bishop extends Piece {
 
     @Override
     public LinkedList<Pair<Integer, Integer>> get_moves() {
-        LinkedList<Pair<Integer, Integer>> moves = new LinkedList<>();
-        for(int i = 0; i < 7; i++){
-            moves.add(new Pair<>(position.get_val1() + i, position.get_val2() + i));
-            moves.add(new Pair<>(position.get_val1() + i, position.get_val2() - i));
-            moves.add(new Pair<>(position.get_val1() - i, position.get_val2() + i));
-            moves.add(new Pair<>(position.get_val1() - i, position.get_val2() - i));
-        }
-        moves.removeIf(i ->
-                i.get_val1() > 7 || i.get_val1() < 0 || i.get_val2() > 7 || i.get_val2() < 0 || i.equals(position)
-        );
-        return moves;
+        return diagonal();
     }
 
     @Override

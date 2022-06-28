@@ -35,6 +35,7 @@ public class Knight extends Piece{
         moves.removeIf(i ->
                 board.get_piece(i.get_val1(), i.get_val2()) != null && board.get_piece(i.get_val1(), i.get_val2()).team == this.team
         );
+
         return moves;
     }
 

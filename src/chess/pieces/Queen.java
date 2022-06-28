@@ -12,26 +12,9 @@ public class Queen extends Piece{
 
     @Override
     public LinkedList<Pair<Integer, Integer>> get_moves() {
-        LinkedList<Pair<Integer, Integer>> diagonal = new LinkedList<>();
-        LinkedList<Pair<Integer, Integer>> straight = new LinkedList<>();
-        for(int i = 0; i < 7; i++){
-            diagonal.add(new Pair<>(position.get_val1() + i, position.get_val2() + i));
-            diagonal.add(new Pair<>(position.get_val1() + i, position.get_val2() - i));
-            diagonal.add(new Pair<>(position.get_val1() - i, position.get_val2() + i));
-            diagonal.add(new Pair<>(position.get_val1() - i, position.get_val2() - i));
-
-            straight.add(new Pair<>(position.get_val1(), position.get_val2() + i));
-            straight.add(new Pair<>(position.get_val1() + i, position.get_val2()));
-            straight.add(new Pair<>(position.get_val1() - i, position.get_val2()));
-            straight.add(new Pair<>(position.get_val1(), position.get_val2() - i));
-        }
         LinkedList<Pair<Integer, Integer>> moves = new LinkedList<>();
-        moves.addAll(diagonal);
-        moves.addAll(straight);
-
-        moves.removeIf(i ->
-                i.get_val1() > 7 || i.get_val1() < 0 || i.get_val2() > 7 || i.get_val2() < 0 || i.equals(position)
-        );
+        moves.addAll(diagonal());
+        moves.addAll(straight());
         return moves;
     }
 
