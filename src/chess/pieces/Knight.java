@@ -27,8 +27,8 @@ public class Knight extends Piece{
 
         //remove out of bounds
         moves.removeIf(i ->
-                i.get_val1() < 0 || i.get_val1() > 8 ||
-                i.get_val2() < 0 || i.get_val2() > 8
+                i.get_val1() < 0 || i.get_val1() > 7 ||
+                i.get_val2() < 0 || i.get_val2() > 7
         );
 
         //remove if occupied by same color
@@ -40,12 +40,18 @@ public class Knight extends Piece{
     }
 
     @Override
-    public void move(int x, int y) {
+    public Boolean move(int x, int y) {
         Pair<Integer, Integer> move = new Pair<>(x, y);
         if (get_moves().contains(move)) {
             board.set_piece(position.get_val1(), position.get_val2(), null);
             this.position = move;
             board.set_piece(position.get_val1(), position.get_val2(), this);
+            return true;
         }
+        return false;
+    }
+    @Override
+    public String toString(){
+        return "N";
     }
 }

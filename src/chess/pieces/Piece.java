@@ -14,55 +14,51 @@ abstract public class Piece {
         this.position = position;
     }
     abstract public LinkedList<Pair<Integer, Integer>> get_moves();
-    abstract public void move(int x, int y);
+    abstract public Boolean move(int x, int y);
+
+    public Team get_team(){
+        return team;
+    }
 
     public LinkedList<Pair<Integer, Integer>> diagonal(){
         LinkedList<Pair<Integer, Integer>> moves = new LinkedList<>();
         //minus x, minus y
         for(int i = 1; position.get_val1() - i >= 0 && position.get_val2() - i >= 0; i++){
             if(board.get_piece(position.get_val1() - i, position.get_val2() - i) != null){
-                if(board.get_piece(position.get_val1() - i, position.get_val2() - i).team == this.team){
-                    break;
-                }else{
+                if (board.get_piece(position.get_val1() - i, position.get_val2() - i).team != this.team) {
                     moves.add(new Pair<>(position.get_val1() - i, position.get_val2() - i));
-                    break;
                 }
+                break;
             }
             moves.add(new Pair<>(position.get_val1() - i, position.get_val2() - i));
         }
         //minus x, plus y
         for(int i = 1; position.get_val1() - i >= 0 && position.get_val2() + i < 8; i++){
             if(board.get_piece(position.get_val1() - i, position.get_val2() + i) != null){
-                if(board.get_piece(position.get_val1() - i, position.get_val2() + i).team == this.team){
-                    break;
-                }else{
+                if (board.get_piece(position.get_val1() - i, position.get_val2() + i).team != this.team) {
                     moves.add(new Pair<>(position.get_val1() - i, position.get_val2() + i));
-                    break;
                 }
+                break;
             }
             moves.add(new Pair<>(position.get_val1() - i, position.get_val2() + i));
         }
         //plus x, minus y
         for(int i = 1; position.get_val1() + i < 8 && position.get_val2() - i >= 0; i++){
             if(board.get_piece(position.get_val1() + i, position.get_val2() - i) != null){
-                if(board.get_piece(position.get_val1() + i, position.get_val2() - i).team == this.team){
-                    break;
-                }else{
+                if (board.get_piece(position.get_val1() + i, position.get_val2() - i).team != this.team) {
                     moves.add(new Pair<>(position.get_val1() + i, position.get_val2() - i));
-                    break;
                 }
+                break;
             }
             moves.add(new Pair<>(position.get_val1() + i, position.get_val2() - i));
         }
         //plus x, plus y
-        for(int i = 1; position.get_val1() + i < 8 && position.get_val2() + i < 8 && board.get_piece(position.get_val1() + i, position.get_val2() + i) == null; i++){
+        for(int i = 1; position.get_val1() + i < 8 && position.get_val2() + i < 8; i++){
             if(board.get_piece(position.get_val1() + i, position.get_val2() + i) != null){
-                if(board.get_piece(position.get_val1() + i, position.get_val2() + i).team == this.team){
-                    break;
-                }else{
+                if (board.get_piece(position.get_val1() + i, position.get_val2() + i).team != this.team) {
                     moves.add(new Pair<>(position.get_val1() + i, position.get_val2() + i));
-                    break;
                 }
+                break;
             }
             moves.add(new Pair<>(position.get_val1() + i, position.get_val2() + i));
         }
@@ -71,19 +67,43 @@ abstract public class Piece {
     public LinkedList<Pair<Integer, Integer>> straight(){
         LinkedList<Pair<Integer, Integer>> moves = new LinkedList<>();
         //minus x
-        for(int i = 1; position.get_val1() - i >= 0 && board.get_piece(position.get_val1() - i, position.get_val2()) == null; i++){
+        for(int i = 1; position.get_val1() - i >= 0; i++){
+            if(board.get_piece(position.get_val1() - i, position.get_val2()) != null){
+                if (board.get_piece(position.get_val1() - i, position.get_val2()).team != this.team) {
+                    moves.add(new Pair<>(position.get_val1() - i, position.get_val2()));
+                }
+                break;
+            }
             moves.add(new Pair<>(position.get_val1() - i, position.get_val2()));
         }
         //plus x
-        for(int i = 1; position.get_val1() + i < 8 && board.get_piece(position.get_val1() + i, position.get_val2()) == null; i++){
+        for(int i = 1; position.get_val1() + i < 8; i++){
+            if(board.get_piece(position.get_val1() + i, position.get_val2()) != null){
+                if (board.get_piece(position.get_val1() + i, position.get_val2()).team != this.team) {
+                    moves.add(new Pair<>(position.get_val1() + i, position.get_val2()));
+                }
+                break;
+            }
             moves.add(new Pair<>(position.get_val1() + i, position.get_val2()));
         }
         //minus y
-        for(int i = 1; position.get_val2() - i >= 0 && board.get_piece(position.get_val1(), position.get_val2() - i) == null; i++){
+        for(int i = 1; position.get_val2() - i >= 0; i++){
+            if(board.get_piece(position.get_val1(), position.get_val2() - i) != null){
+                if (board.get_piece(position.get_val1(), position.get_val2() - i).team != this.team) {
+                    moves.add(new Pair<>(position.get_val1(), position.get_val2() - i));
+                }
+                break;
+            }
             moves.add(new Pair<>(position.get_val1(), position.get_val2() - i));
         }
         //plus y
-        for(int i = 1; position.get_val2() + i < 8 && board.get_piece(position.get_val1(), position.get_val2() + i) == null; i++){
+        for(int i = 1; position.get_val2() + i < 8; i++){
+            if(board.get_piece(position.get_val1(), position.get_val2() + i) != null){
+                if (board.get_piece(position.get_val1(), position.get_val2() + i).team != this.team) {
+                    moves.add(new Pair<>(position.get_val1(), position.get_val2() + i));
+                }
+                break;
+            }
             moves.add(new Pair<>(position.get_val1(), position.get_val2() + i));
         }
         return moves;

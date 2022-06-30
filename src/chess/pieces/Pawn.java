@@ -57,17 +57,22 @@ public class Pawn extends Piece {
             }
         }
 
-        System.out.println(position.get_val1() + " - " + position.get_val2() + "\n");
         return moves;
     }
 
     @Override
-    public void move(int x, int y) {
+    public Boolean move(int x, int y) {
         Pair<Integer, Integer> move = new Pair<>(x, y);
         if (get_moves().contains(move)) {
             board.set_piece(position.get_val1(), position.get_val2(), null);
             this.position = move;
             board.set_piece(position.get_val1(), position.get_val2(), this);
+            return true;
         }
+        return false;
+    }
+    @Override
+    public String toString(){
+        return "P";
     }
 }
