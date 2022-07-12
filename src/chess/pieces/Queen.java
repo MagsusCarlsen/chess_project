@@ -3,11 +3,30 @@ package chess.pieces;
 import chess.board.*;
 import chess.utils.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 public class Queen extends Piece{
     public Queen(Team team, Board board, Pair<Integer, Integer> position){
         super(board, team, position);
         board.set_piece(position.get_val1(), position.get_val2(), this);
+        String path = "./src/chess/pieces/resources/";
+        if (team == Team.BLACK) {
+            path = path + "black/";
+        }else{
+            path = path + "white/";
+        }
+        Image image = null;
+        try {
+            image = ImageIO.read(new File(path + "queen.png"));
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        image = image.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
     }
 
     @Override

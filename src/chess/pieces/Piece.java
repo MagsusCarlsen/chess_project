@@ -2,11 +2,13 @@ package chess.pieces;
 import chess.board.Board;
 import chess.utils.Pair;
 
+import javax.swing.*;
 import java.util.LinkedList;
 
 abstract public class Piece {
     protected Board board;
     protected final Team team;
+    protected ImageIcon icon;
     protected Pair<Integer, Integer> position;
     public Piece(Board board, Team team, Pair<Integer, Integer> position){
         this.board = board;
@@ -18,6 +20,9 @@ abstract public class Piece {
 
     public Team get_team(){
         return team;
+    }
+    public ImageIcon get_icon(){
+        return icon;
     }
 
     public LinkedList<Pair<Integer, Integer>> diagonal(){

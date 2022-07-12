@@ -3,14 +3,35 @@ package chess.pieces;
 import chess.board.Board;
 import chess.utils.Pair;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
+import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 import static java.lang.Math.*;
 
 public class Pawn extends Piece {
     public Pawn(Team team, Board board, Pair<Integer, Integer> position) {
         super(board, team, position);
         board.set_piece(position.get_val1(), position.get_val2(), this);
+        String path = "./src/chess/pieces/resources/";
+        if (team == Team.BLACK) {
+            path = path + "black/";
+        }else{
+            path = path + "white/";
+        }
+        Image image = null;
+        try {
+            image = ImageIO.read(new File(path + "pawn.png"));
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        image = image.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
     }
 
     @Override

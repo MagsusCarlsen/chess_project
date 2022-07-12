@@ -1,15 +1,28 @@
 package chess.game;
 
-import chess.pieces.*;
 import chess.board.*;
-import chess.utils.Pair;
 
-import java.util.LinkedList;
+import javax.swing.*;
+import java.awt.*;
 
-public class GameMain {
-    public static void main(String[] args){
-        Board board = new Board();
-        board.fill_board();
-        System.out.println(board.game() + " won the game");
+public class GameMain{
+    public static void main(String[] args) {
+        Runnable runnable = new Runnable(){
+            @Override
+            public void run(){
+                Board board = new Board();
+                JFrame frame = new JFrame("Chess");
+                frame.add(board.get_gui());
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setLocationByPlatform(true);
+                frame.pack();
+
+                frame.setMinimumSize(frame.getSize());
+                frame.setVisible(true);
+            }
+        };
+        SwingUtilities.invokeLater(runnable);
     }
+
+
 }
